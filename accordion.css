@@ -1,0 +1,37 @@
+.row {
+    margin-bottom: 8px;
+}
+
+svg text {
+    fill: black;
+    text-anchor: middle;
+    font-size: 0.7rem;
+}
+
+svg .y-label {
+    text-anchor: start;
+    alignment-baseline: middle;
+}
+
+svg .concertina-outline {
+    fill: #f8f8f8;
+    stroke: #aaa;
+    stroke-width: 1;
+}
+
+svg .hill-fold {
+    stroke: #222;
+    stroke-width: 0.5;
+    stroke-dasharray: 4, 4;
+}
+
+svg .valley-fold {
+    stroke: #222;
+    stroke-width: 1;
+    stroke-dasharray: 2, 2;
+}
+
+svg .cut-line {
+    stroke: #222;
+    stroke-width: 1;
+}

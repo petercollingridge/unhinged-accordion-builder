@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Accordion</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="accordion.css">
+
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    </head>
+    <body>
+
+    <div id="app">
+        <div class="container">
+            <h1>Concertina builder</h1>
+            <div class="row">
+                <label class="col-sm-2" for="paper-type-input">Paper type: </label>
+                <select class="col-sm-2" id="paper-type-input" v-model="paperType">
+                    <option value="custom" selected="selected">Custom</option>
+                    <option value="A1">A1</option>
+                    <option value="Full imperial">Full imperial</option>
+                </select>
+            </div>
+            <div class="row">
+                <label class="col-sm-2" for="width-input">Width: </label>
+                <input class="col-sm-2" id="width-input" v-model="width" />
+                <label class="col-sm-2" for="height-input">Height: </label>
+                <input class="col-sm-2" id="height-input" v-model="height" />
+            </div>
+            <div class="row">
+                <label class="col-sm-2" for="columns-input">Columns: </label>
+                <input class="col-sm-2" id="columns-input" v-model="columns" />
+                <label class="col-sm-2" for="rows-input">Rows: </label>
+                <input class="col-sm-2" id="rows-input" v-model="rows" />
+            </div>
+            
+            <form method="GET" >
+                <input name="test"/>
+                <button type="submit">Submit</button>
+            </form>
+
+            <h2>Folding diagram</h2>
+            <div class="row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="-1 -1 602 410">
+                    <path class="concertina-outline" :d="paperPath"/>
+                    <!-- Vertical folds -->
+                    <line v-bind:class="foldType(i)" v-for="i in columns - 1" :x1="getX(i)" :x2="getX(i)" :y1="getFoldY(i, 0)" :y2="getFoldY(i, rows)"/>
+                    
+                    <!-- Horizontal folds and cuts -->
+                    <g :key="columns" v-for="y in rows - 1">
+                        <line v-bind:class="foldOrCut(x - 1, y)"  v-for="x in columns" :x1="getX(x - 1)" :x2="getX(x)"  :y1="getFoldY(x - 1, y)" :y2="getFoldY(x, y)"/>
+                    </g>
+
+                    <!-- Labels -->
+                    <text :x="pageWidth / 2" y="18">{{ truePageWidth }}</text>
+                    <text class="y-label" x="5" :y="pageHeight / 2">{{ truePageHeight  }}</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+<script src="accordion.js" type="text/javascript"></script>
+    </body>
+</html>
