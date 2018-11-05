@@ -1,4 +1,11 @@
+var router = new VueRouter({
+    routes: [
+        { path: '*' }
+    ]
+});
+
 var app = new Vue({
+    router: router,
     el: '#app',
     data: {
         width: 76,
@@ -22,6 +29,7 @@ var app = new Vue({
     },
     computed: {
         scale: function() {
+            console.log(this.$router.route)
             return Math.min(600 / this.width, 400 / this.height);
         },
         pageWidth: function() {
