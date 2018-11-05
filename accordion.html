@@ -46,11 +46,6 @@
                     <path class="concertina-outline" :d="paperPath"/>
                     <!-- Vertical folds -->
                     <line v-bind:class="foldType(i)" v-for="i in columns - 1" :x1="getX(i)" :x2="getX(i)" :y1="getFoldY(i, 0)" :y2="getFoldY(i, rows)"/>
-                    
-                    <!-- Horizontal folds and cuts -->
-                    <g :key="columns" v-for="y in rows - 1">
-                        <line v-bind:class="foldOrCut(x - 1, y)"  v-for="x in columns" :x1="getX(x - 1)" :x2="getX(x)"  :y1="getFoldY(x - 1, y)" :y2="getFoldY(x, y)"/>
-                    </g>
 
                     <!-- Labels -->
                     <text :x="pageWidth / 2" y="18">{{ truePageWidth }}</text>

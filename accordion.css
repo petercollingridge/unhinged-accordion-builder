@@ -30,8 +30,3 @@ svg .valley-fold {
     stroke-width: 1;
     stroke-dasharray: 2, 2;
 }
-
-svg .cut-line {
-    stroke: #222;
-    stroke-width: 1;
-}
