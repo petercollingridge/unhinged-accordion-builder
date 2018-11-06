@@ -43,6 +43,10 @@
                     <!-- Vertical folds -->
                     <line v-bind:class="foldType(i)" v-for="i in columns - 1" :x1="getX(i)" :x2="getX(i)" :y1="getFoldY(i, 0)" :y2="getFoldY(i, rows)"/>
 
+                    <!-- Horizontal folds -->
+                    <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 0" :x1="getX(0)" :x2="getX(1)" :y1="getFoldY(0, i)" :y2="getFoldY(1, i)"/>
+                    <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 1" :x1="getX(columns -  1)" :x2="getX(columns)" :y1="getFoldY(columns - 1, i)" :y2="getFoldY(columns, i)"/>
+
                     <!-- Labels -->
                     <text :x="pageWidth / 2" y="18">{{ truePageWidth }}</text>
                     <text class="y-label" x="5" :y="pageHeight / 2">{{ truePageHeight  }}</text>
