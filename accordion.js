@@ -13,6 +13,7 @@ var app = new Vue({
         columns: 4,
         rows: 3,
         paperType: 'custom',
+        units: 'mm',
         paperTypes: {
             'A1' : [84.1, 59.4],
             'Full imperial' : [76, 56],

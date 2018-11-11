@@ -18,25 +18,45 @@
     
     <article id="app">
         <section id="option-box">
-            <div class="row">
-                <label class="col-sm-2" for="paper-type-input">Paper type: </label>
-                <select class="col-sm-2" id="paper-type-input" v-model="paperType">
-                    <option value="custom" selected="selected">Custom</option>
-                    <option value="A1">A1</option>
-                    <option value="Full imperial">Full imperial</option>
-                </select>
+            <div class="option-group">
+                <span class="option">
+                    <label for="paper-type-input">Paper type: </label>
+                    <select id="paper-type-input" v-model="paperType">
+                        <option value="custom" selected="selected">Custom</option>
+                        <option value="A1">A1</option>
+                        <option value="Full imperial">Full imperial</option>
+                    </select>
+                </span>
+                <span class="option">
+                    <label for="units-input">Units: </label>
+                    <select id="units-input" v-model="units">
+                        <option value="mm" selected="selected">mm</option>
+                        <option value="in">inches</option>
+                        <option value="cm">cm</option>
+                    </select>
+                </span>
             </div>
-            <div class="row">
-                <label class="col-sm-2" for="width-input">Width: </label>
-                <input class="col-sm-2" id="width-input" v-model="width" />
-                <label class="col-sm-2" for="height-input">Height: </label>
-                <input class="col-sm-2" id="height-input" v-model="height" />
+
+            <div class="option-group">
+                <span class="option">
+                    <label for="width-input">Width: </label>
+                    <input id="width-input" v-model="width" />
+                </span>
+                <span class="option">
+                    <label for="height-input">Height: </label>
+                    <input id="height-input" v-model="height" />
+                </span>
             </div>
-            <div class="row">
-                <label class="col-sm-2" for="columns-input">Columns: </label>
-                <input class="col-sm-2" id="columns-input" v-model="columns" />
-                <label class="col-sm-2" for="rows-input">Rows: </label>
-                <input class="col-sm-2" id="rows-input" v-model="rows" />
+
+            <div class="option-group">
+                <span class="option">
+                    <label for="columns-input">Columns: </label>
+                    <input id="columns-input" v-model="columns" />
+                </span>
+                <span class="option">
+                    <label for="rows-input">Rows: </label>
+                    <input id="rows-input" v-model="rows" />
+                </span>
             </div>
         </section>
 

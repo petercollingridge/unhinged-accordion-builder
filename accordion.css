@@ -20,11 +20,33 @@ h2 {
     margin-top: 32px;
 }
 
+article {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
 section {
     max-width: 720px;
     margin: 0 auto;
 }
 
+.option-box {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(400px, 1fr));
+}
+
+.option-group {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(250px, 1fr));
+    margin-bottom: 8px;
+}
+
+.option {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
 
 .row {
     margin-bottom: 8px;
