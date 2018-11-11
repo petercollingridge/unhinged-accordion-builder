@@ -8,8 +8,8 @@ var accordionBuilder = Vue.component('accordion-builder', {
     props: ['widthParameter', 'heightParameter'],
     data: function() {
         return {
-            width: this.widthParameter,
-            height: this.heightParameter,
+            widthInput: this.widthParameter,
+            heightInput: this.heightParameter,
             columns: 4,
             rows: 3,    
             paperType: 'custom',
@@ -27,6 +27,26 @@ var accordionBuilder = Vue.component('accordion-builder', {
         }
     },
     computed: {
+        width: function() {
+            var width = parseFloat(this.widthInput);
+            
+            if (isNaN(width)) { width = 0; }
+            if (width < 0) { width = -width; }
+            else if (width > 100000) { width = 100000; }
+
+            this.widthInput = width;
+            return width;
+        },
+        height: function() {
+            var height = parseFloat(this.heightInput);
+
+            if (isNaN(height)) { height = 0; }
+            if (height < 0) { height = -height; }
+            else if (height > 100000) { height = 100000; }
+
+            this.heightInput = height;
+            return height;
+        },
         scale: function() {
             return Math.min(600 / this.width, 400 / this.height);
         },
