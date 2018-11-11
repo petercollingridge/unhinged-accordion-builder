@@ -15,69 +15,78 @@
     <header>
         <h1>Accordion builder</h1>
     </header>
-    
-    <article id="app">
-        <section id="option-box">
-            <div class="option-group">
-                <span class="option">
-                    <label for="paper-type-input">Paper type: </label>
-                    <select id="paper-type-input" v-model="paperType">
-                        <option value="custom" selected="selected">Custom</option>
-                        <option value="A1">A1</option>
-                        <option value="Full imperial">Full imperial</option>
-                    </select>
-                </span>
-                <span class="option">
-                    <label for="units-input">Units: </label>
-                    <select id="units-input" v-model="units">
-                        <option value="mm" selected="selected">mm</option>
-                        <option value="in">inches</option>
-                        <option value="cm">cm</option>
-                    </select>
-                </span>
-            </div>
 
-            <div class="option-group">
-                <span class="option">
-                    <label for="width-input">Width: </label>
-                    <input id="width-input" v-model="width" />
-                </span>
-                <span class="option">
-                    <label for="height-input">Height: </label>
-                    <input id="height-input" v-model="height" />
-                </span>
-            </div>
-
-            <div class="option-group">
-                <span class="option">
-                    <label for="columns-input">Columns: </label>
-                    <input id="columns-input" v-model="columns" />
-                </span>
-                <span class="option">
-                    <label for="rows-input">Rows: </label>
-                    <input id="rows-input" v-model="rows" />
-                </span>
-            </div>
-        </section>
-
-        <section>
-            <h2>Folding diagram</h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="360" viewBox="-1 -1 602 410">
-                <path class="concertina-outline" :d="paperPath"/>
-                <!-- Vertical folds -->
-                <line v-bind:class="foldType(i)" v-for="i in columns - 1" :x1="getX(i)" :x2="getX(i)" :y1="getFoldY(i, 0)" :y2="getFoldY(i, rows)"/>
-
-                <!-- Horizontal folds -->
-                <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 0" :x1="getX(0)" :x2="getX(1)" :y1="getFoldY(0, i)" :y2="getFoldY(1, i)"/>
-                <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 1" :x1="getX(columns -  1)" :x2="getX(columns)" :y1="getFoldY(columns - 1, i)" :y2="getFoldY(columns, i)"/>
-
-                <!-- Labels -->
-                <text :x="pageWidth / 2" y="18">{{ truePageWidth }}</text>
-                <text class="y-label" x="5" :y="pageHeight / 2">{{ truePageHeight  }}</text>
-            </svg>
-        </section>
+    <article>
+        <div id="app">
+            <router-view></router-view>
+        </div>
     </article>
+    
+    <script type="text/x-template" id="accordion-template">
+        <div>
+            <section id="option-box">
+                <div class="option-group">
+                    <span class="option">
+                        <label for="paper-type-input">Paper type: </label>
+                        <select id="paper-type-input" v-model="paperType">
+                            <option value="custom" selected="selected">Custom</option>
+                            <option value="A1">A1</option>
+                            <option value="Full imperial">Full imperial</option>
+                        </select>
+                    </span>
+                    <span class="option">
+                        <label for="units-input">Units: </label>
+                        <select id="units-input" v-model="units">
+                            <option value="mm" selected="selected">mm</option>
+                            <option value="in">inches</option>
+                            <option value="cm">cm</option>
+                        </select>
+                    </span>
+                </div>
 
-<script src="accordion.js" type="text/javascript"></script>
+                <div class="option-group">
+                    <span class="option">
+                        <label for="width-input">Width: </label>
+                        <input id="width-input" v-model="width"/>
+                    </span>
+                    <span class="option">
+                        <label for="height-input">Height: </label>
+                        <input id="height-input" v-model="height"/>
+                    </span>
+                </div>
+
+                <div class="option-group">
+                    <span class="option">
+                        <label for="columns-input">Columns: </label>
+                        <input id="columns-input" v-model="columns" />
+                    </span>
+                    <span class="option">
+                        <label for="rows-input">Rows: </label>
+                        <input id="rows-input" v-model="rows" />
+                    </span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Folding diagram</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="360" viewBox="-1 -1 602 410">
+                    <path class="concertina-outline" :d="paperPath"/>
+                    <!-- Vertical folds -->
+                    <line v-bind:class="foldType(i)" v-for="i in columns - 1" :x1="getX(i)" :x2="getX(i)" :y1="getFoldY(i, 0)" :y2="getFoldY(i, rows)"/>
+
+                    <!-- Horizontal folds -->
+                    <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 0" :x1="getX(0)" :x2="getX(1)" :y1="getFoldY(0, i)" :y2="getFoldY(1, i)"/>
+                    <line class="hill-fold" v-for="i in rows - 1" v-if="(rows - i) % 2 === 1" :x1="getX(columns -  1)" :x2="getX(columns)" :y1="getFoldY(columns - 1, i)" :y2="getFoldY(columns, i)"/>
+
+                    <!-- Labels -->
+                    <text :x="pageWidth / 2" y="18">{{ truePageWidth }}</text>
+                    <text class="y-label" x="5" :y="pageHeight / 2">{{ truePageHeight  }}</text>
+                </svg>
+            </section>
+        </div>
+    </script>
+
+    <script src="accordion.js" type="text/javascript"></script>
+
     </body>
 </html>

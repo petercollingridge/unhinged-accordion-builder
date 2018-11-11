@@ -1,23 +1,21 @@
-var router = new VueRouter({
-    routes: [
-        { path: '*' }
-    ]
-});
+var paperTypes = {
+    'A1' : [84.1, 59.4],
+    'Full imperial' : [76, 56],
+};
 
-var app = new Vue({
-    router: router,
-    el: '#app',
-    data: {
-        width: 76,
-        height: 56,
-        columns: 4,
-        rows: 3,
-        paperType: 'custom',
-        units: 'mm',
-        paperTypes: {
-            'A1' : [84.1, 59.4],
-            'Full imperial' : [76, 56],
-        }
+var accordionBuilder = Vue.component('accordion-builder', {
+    template: '#accordion-template',
+    props: ['widthParameter', 'heightParameter'],
+    data: function() {
+        return {
+            width: this.widthParameter,
+            height: this.heightParameter,
+            columns: 4,
+            rows: 3,    
+            paperType: 'custom',
+            units: 'mm',
+            paperTypes: paperTypes
+        };
     },
     watch: {
         paperType: function(type) {
@@ -30,7 +28,6 @@ var app = new Vue({
     },
     computed: {
         scale: function() {
-            console.log(this.$router.route)
             return Math.min(600 / this.width, 400 / this.height);
         },
         pageWidth: function() {
@@ -128,4 +125,23 @@ var app = new Vue({
             return i % 2 ? { 'hill-fold': true }: { 'valley-fold': true };
         }
     }
+});
+
+var router = new VueRouter({
+    mode: 'history',
+    routes: [{
+        path: '*',
+        component: accordionBuilder,
+        props: function(route) {
+            return {
+                widthParameter: route.query.width || 76,
+                heightParameter: route.query.height || 56
+            };
+        }
+    }]
+});
+
+var app = new Vue({
+    router: router,
+    el: '#app'
 });
