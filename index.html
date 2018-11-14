@@ -38,7 +38,7 @@
                         <label for="units-input">Units: </label>
                         <select id="units-input" v-model="units">
                             <option value="mm" selected="selected">mm</option>
-                            <option value="in">inches</option>
+                            <option value="inches">inches</option>
                             <option value="cm">cm</option>
                         </select>
                     </span>
@@ -47,22 +47,28 @@
                 <div class="option-group">
                     <span class="option">
                         <label for="width-input">Width: </label>
-                        <input id="width-input" v-model="widthInput"/>
+                        <input id="width-input" type="number" v-model="widthInput"/>
                     </span>
                     <span class="option">
                         <label for="height-input">Height: </label>
-                        <input id="height-input" v-model="heightInput"/>
+                        <input id="height-input" type="number" v-model="heightInput"/>
                     </span>
                 </div>
 
                 <div class="option-group">
                     <span class="option">
                         <label for="columns-input">Columns: </label>
-                        <input id="columns-input" v-model="columns" />
+                        <div class="slider-option">
+                            <div>{{ columns }}</div>
+                            <input id="columns-input" type="range" min="2" max="12" v-model="columns" />
+                        </div>
                     </span>
                     <span class="option">
                         <label for="rows-input">Rows: </label>
-                        <input id="rows-input" v-model="rows" />
+                        <div class="slider-option">
+                            <div>{{ rows }}</div>
+                            <input id="rows-input" type="range" min="2" max="12" v-model="rows" />
+                        </div>
                     </span>
                 </div>
             </section>

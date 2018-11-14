@@ -33,6 +33,7 @@ section {
 .option-box {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax(400px, 1fr));
+    grid-column-gap: 50px;
 }
 
 .option-group {
@@ -43,9 +44,18 @@ section {
 
 .option {
     display: grid;
-    grid-template-columns: 1fr 100px;
+    grid-template-columns: 1fr 150px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.slider-option {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+}
+
+.slider-option input {
+    width: 118px;
 }
 
 .row {

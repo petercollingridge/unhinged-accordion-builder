@@ -1,6 +1,13 @@
 var paperTypes = {
-    'A1' : [84.1, 59.4],
-    'Full imperial' : [76, 56],
+    'Full imperial' : [768.35, 558.8, 'inches'],
+    'A1' : [841, 594, 'mm'],
+    'A0' : [1189, 841, 'mm'],
+};
+
+var convertToMM = {
+    'mm': 1,
+    'cm': 10,
+    'inches': 25.4
 };
 
 var accordionBuilder = Vue.component('accordion-builder', {
@@ -21,9 +28,15 @@ var accordionBuilder = Vue.component('accordion-builder', {
         paperType: function(type) {
             var paperType = this.paperTypes[type];
             if (paperType) {
-                this.width = paperType[0];
-                this.height = paperType[1];
+                this.widthInput = paperType[0];
+                this.heightInput = paperType[1];
+                this.units = paperType[2];
             }
+        },
+        units: function(newType, oldType) {
+            var scale = convertToMM[oldType] / convertToMM[newType];
+            this.widthInput *= scale;
+            this.heightInput *= scale;
         }
     },
     computed: {
@@ -34,6 +47,7 @@ var accordionBuilder = Vue.component('accordion-builder', {
             if (width < 0) { width = -width; }
             else if (width > 100000) { width = 100000; }
 
+            width = Math.round(width * 10000) / 10000;
             this.widthInput = width;
             return width;
         },
@@ -44,6 +58,7 @@ var accordionBuilder = Vue.component('accordion-builder', {
             if (height < 0) { height = -height; }
             else if (height > 100000) { height = 100000; }
 
+            height = Math.round(height * 10000) / 10000;
             this.heightInput = height;
             return height;
         },
